@@ -10,7 +10,8 @@
 // Import React and the hooks we need
 // useState stores data that can change (like loading state)
 // useEffect runs code when the component first appears on screen
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useAuth } from '../AuthContext';
 
 // Import React Native components
 // View = like a <div> in HTML, it is a container for other elements
@@ -33,6 +34,7 @@ import {
 // 'navigation' is an object that lets us switch between screens
 // We pass it from App.js so this screen can tell App.js to change the page
 const HomeScreen = ({ navigation }) => {
+    const { user } = useAuth();
 
     // This is the JSX that React Native will display on the phone screen
     // In React Native, ALL text must be inside <Text> tags
@@ -72,11 +74,12 @@ const HomeScreen = ({ navigation }) => {
             {/* In React Native, we use TouchableOpacity instead of <button> */}
             {/* onPress is like onClick in React web */}
             <View style={styles.buttonGroup}>
+                {!user && <>
 
                 {/* Login button */}
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation('login')}
+                    onPress={() => navigation.navigate('Login')}
                 >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
@@ -84,15 +87,16 @@ const HomeScreen = ({ navigation }) => {
                 {/* Register button */}
                 <TouchableOpacity
                     style={[styles.button, styles.buttonSecondary]}
-                    onPress={() => navigation('register')}
+                    onPress={() => navigation.navigate('Register')}
                 >
                     <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
 
+                </>}
                 {/* Book Exchange button */}
                 <TouchableOpacity
                     style={[styles.button, styles.buttonInfo]}
-                    onPress={() => navigation('bookExchange')}
+                    onPress={() => navigation.navigate(user ? 'Books' : 'Login')}
                 >
                     <Text style={styles.buttonText}>Book Exchange</Text>
                 </TouchableOpacity>

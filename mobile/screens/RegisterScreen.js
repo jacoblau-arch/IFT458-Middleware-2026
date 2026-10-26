@@ -149,13 +149,13 @@ const RegisterScreen = ({ navigation }) => {
                 {/* Link to login page */}
                 <View style={styles.linkRow}>
                     <Text style={styles.linkText}>Already have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation('login')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.link}>Login</Text>
                     </TouchableOpacity>
                 </View>
 
                 {/* Back to home */}
-                <TouchableOpacity onPress={() => navigation('home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Text style={[styles.link, { textAlign: 'center', marginTop: 10 }]}>
                         Back to Home
                     </Text>

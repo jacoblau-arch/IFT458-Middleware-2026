@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const AuthContext = createContext();
 
@@ -8,25 +8,25 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const login = (userData, tokenData) => {
+    const login = useCallback((userData, tokenData) => {
         setUser(userData);
         setToken(tokenData);
         setError(null);
-    };
+    }, []);
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setUser(null);
         setToken(null);
         setError(null);
-    };
+    }, []);
 
-    const setLoading = (loading) => {
+    const setLoading = useCallback((loading) => {
         setIsLoading(loading);
-    };
+    }, []);
 
-    const setAuthError = (err) => {
+    const setAuthError = useCallback((err) => {
         setError(err);
-    };
+    }, []);
 
     return (
         <AuthContext.Provider value={{

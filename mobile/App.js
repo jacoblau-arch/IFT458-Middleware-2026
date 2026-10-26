@@ -1,9 +1,11 @@
 // I changed this comment: I dont know what to change for this file so I am gonna add my name to the comment. My name is Susan Arraez :)
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Manages screen navigation and user authentication state
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Platform } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, Platform, ActivityIndicator } from 'react-native';
 
 // Import all screen components
 import HomeScreen from './screens/HomeScreen';
@@ -19,7 +21,7 @@ import { getSavedUser } from './utils/api';
 
 
 
-const loggermiddleware = require('./loggerMiddleware'); //Bryce Pratt
+const loggermiddleware = (...args) => console.log(...args); //Bryce Pratt
 
 // Import AuthContext
 import { AuthProvider, useAuth } from './AuthContext';
@@ -44,7 +46,19 @@ if (Platform.OS === 'web') {
     `;
     document.head.appendChild(style);
 }
-
+const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    errorText: {
+        color: 'red'
+    },
+    bottomNav: {
+        backgroundColor: '#0d6efd'
+    }
+});
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +73,6 @@ const MemoizedLogoutScreen = React.memo(LogoutScreen);
 
 // Auth Stack Navigator
 function AuthStack() {
-    const { login } = useAuth();
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={MemoizedHomeScreen} />
@@ -68,7 +81,6 @@ function AuthStack() {
             <Stack.Screen
                 name="AuthSuccess"
                 component={MemoizedAuthSuccessScreen}
-                initialParams={{ login }}
             />
         </Stack.Navigator>
     );
@@ -86,13 +98,7 @@ function MainTabs({ user, token, onLogout }) {
                 tabBarActiveTintColor: '#ffffff',
                 tabBarInactiveTintColor: '#adb5bd',
                 tabBarStyle: styles.bottomNav,
-                tabBarButton: (props) => (
-                    <TouchableOpacity
-                        {...props}
-                        accessibilityLabel={`Navigate to ${route.name}`}
-                        accessibilityRole="button"
-                    />
-                ),
+                tabBarAccessibilityLabel: `Navigate to ${route.name}`,
             })}
         >
             <Tab.Screen

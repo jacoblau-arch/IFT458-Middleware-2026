@@ -39,15 +39,18 @@ app.use(bodyParser.json());
 // parse cookies so we can read JWT tokens from cookies
 app.use(cookieParser());
 
+// Use the documented API prefix when API_VERSION is not configured.
+const apiVersion = (process.env.API_VERSION || '/api/v1').replace(/\/+$/, '');
+
 // 2) ROUTES API for Users
 // User routes handle signup and login API endpoints
 const userRouter = require('./routes/userRoutes');
-app.use(`${process.env.API_VERSION}/users`, userRouter);
+app.use(`${apiVersion}/users`, userRouter);
 
 // 3) ROUTES API for Books
 // Book routes handle CRUD operations for books
 const booksRoutes = require('./routes/bookRoutes.js');
-app.use(`${process.env.API_VERSION}/books`, booksRoutes);
+app.use(`${apiVersion}/books`, booksRoutes);
 
 // 4) Landing page - shows setup instructions when you visit the server in a browser
 app.get('/', (req, res) => {

@@ -67,7 +67,7 @@ const signToken = id => {
   const jwtToken = jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
-  console.log('JWT Token created:', jwtToken);
+  // Never write authentication tokens to logs.
   return jwtToken;
 };
 

@@ -1,0 +1,112 @@
+Jacob Lau | IFT458 Module 5 | Actual Git output | 2026-10-26 JST
+Existing clone was used. No new clone or history rewrite was performed. All pushes target origin (Jacob Lau fork), never upstream.
+
+> git --version
+git version 2.53.0.windows.3
+
+> git remote -v
+origin	https://github.com/jacoblau-arch/IFT458-Middleware-2026.git (fetch)
+origin	https://github.com/jacoblau-arch/IFT458-Middleware-2026.git (push)
+upstream	https://github.com/DineshSthapit/IFT458-Middleware-2026.git (fetch)
+upstream	https://github.com/DineshSthapit/IFT458-Middleware-2026.git (push)
+
+> git branch -vv
+* main 73c95a3 [origin/main] Fix Expo SDK 55 web startup, navigation, and backend integration
+
+> git status --short
+ M README.md
+ M ServerStudent.MD
+?? package-lock.json
+
+> git diff --check
+warning: in the working copy of 'ServerStudent.MD', LF will be replaced by CRLF the next time Git touches it
+
+> git add ServerStudent.MD README.md
+warning: in the working copy of 'ServerStudent.MD', LF will be replaced by CRLF the next time Git touches it
+
+> git commit -m Add Jacob Lau backend observations and verification notes
+[main f699d30] Add Jacob Lau backend observations and verification notes
+ 2 files changed, 28 insertions(+), 2 deletions(-)
+
+> git push origin main
+To https://github.com/jacoblau-arch/IFT458-Middleware-2026.git
+   73c95a3..f699d30  main -> main
+
+> git status --short
+?? package-lock.json
+?? screenshots/jacob-lau/
+
+> git add screenshots/jacob-lau
+
+> git commit -m Add Jacob Lau backend and running app evidence
+[main 140b292] Add Jacob Lau backend and running app evidence
+ 4 files changed, 24 insertions(+)
+ create mode 100644 screenshots/jacob-lau/backend-page.jpg
+ create mode 100644 screenshots/jacob-lau/backend-running-output.txt
+ create mode 100644 screenshots/jacob-lau/mobile-web-books.jpg
+ create mode 100644 screenshots/jacob-lau/mobile-web-home.jpg
+
+> git push origin main
+To https://github.com/jacoblau-arch/IFT458-Middleware-2026.git
+   f699d30..140b292  main -> main
+
+> git status --short
+?? MobileStudent.MD
+?? package-lock.json
+
+> git add MobileStudent.MD
+
+> git commit -m Add Jacob Lau React Native and Expo notes
+[main 795e39c] Add Jacob Lau React Native and Expo notes
+ 1 file changed, 30 insertions(+)
+ create mode 100644 MobileStudent.MD
+
+> git push origin main
+To https://github.com/jacoblau-arch/IFT458-Middleware-2026.git
+   140b292..795e39c  main -> main
+
+> git status --short
+?? package-lock.json
+?? screenshots_mobile/jacob-lau/
+
+> git add screenshots_mobile/jacob-lau
+
+> git commit -m Add Jacob Lau mobile web integration screenshot
+[main 0ac5e55] Add Jacob Lau mobile web integration screenshot
+ 2 files changed, 5 insertions(+)
+ create mode 100644 screenshots_mobile/jacob-lau/README.md
+ create mode 100644 screenshots_mobile/jacob-lau/mobile-web-books.jpg
+
+> git push origin main
+To https://github.com/jacoblau-arch/IFT458-Middleware-2026.git
+   795e39c..0ac5e55  main -> main
+
+> git status --short
+?? AssignmentStatus-Jacob.md
+?? package-lock.json
+
+> git log -6 --oneline
+0ac5e55 Add Jacob Lau mobile web integration screenshot
+795e39c Add Jacob Lau React Native and Expo notes
+140b292 Add Jacob Lau backend and running app evidence
+f699d30 Add Jacob Lau backend observations and verification notes
+73c95a3 Fix Expo SDK 55 web startup, navigation, and backend integration
+1569e1f Screenshot of mobile app page.
+
+> git add Git-workflow-Jacob.txt AssignmentStatus-Jacob.md
+
+> git commit -m Document assignment Git cycles and remaining manual checks
+[main 2558f0e] Document assignment Git cycles and remaining manual checks
+ 2 files changed, 120 insertions(+)
+ create mode 100644 AssignmentStatus-Jacob.md
+ create mode 100644 Git-workflow-Jacob.txt
+
+> git push origin main
+To https://github.com/jacoblau-arch/IFT458-Middleware-2026.git
+   0ac5e55..2558f0e  main -> main
+
+> git status --short
+?? package-lock.json
+
+> git rev-parse HEAD
+2558f0e1bf2241b187b00b202182c3fc1150b702

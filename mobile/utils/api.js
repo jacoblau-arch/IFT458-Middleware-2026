@@ -23,7 +23,9 @@ const PHONE_API_BASE = 'http://192.168.1.31:4000/api/v1';
 
 // If running in web browser, use localhost automatically
 // If running on phone, use the IP address above
-const API_BASE = 'http://192.168.1.31:4000/api/v1';
+const API_BASE = process.env.EXPO_PUBLIC_API_BASE || (
+    Platform.OS === 'web' ? 'http://localhost:4000/api/v1' : PHONE_API_BASE
+);
 // ============================================================
 
 // Import our cross-platform storage helper

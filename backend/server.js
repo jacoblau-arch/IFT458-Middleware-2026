@@ -30,7 +30,7 @@ const DB = process.env.DATABASE.replace(
 );
 
 // Connect to MongoDB using mongoose
-console.log(DB); // check the database connection string
+// Keep database connection credentials out of logs.
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -43,7 +43,7 @@ mongoose
   })
   .catch(err => {
     console.log('DB connection failed!');
-    console.log(err);
+    console.log('Check database configuration and network access.');
   });
 
 // Start the server on the port from config.env or default 3000

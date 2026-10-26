@@ -144,13 +144,13 @@ const LoginScreen = ({ navigation }) => {
                 {/* Link to register page */}
                 <View style={styles.linkRow}>
                     <Text style={styles.linkText}>Dont have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation('register')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                         <Text style={styles.link}>Sign-up</Text>
                     </TouchableOpacity>
                 </View>
 
                 {/* Back to home button */}
-                <TouchableOpacity onPress={() => navigation('home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Text style={[styles.link, { textAlign: 'center', marginTop: 10 }]}>
                         Back to Home
                     </Text>

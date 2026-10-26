@@ -5,7 +5,9 @@
 //
 // This is similar to the BookExchange component in the React web version
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useAuth } from '../AuthContext';
 import {
     View,
     Text,
@@ -19,7 +21,8 @@ import {
 // Import the getBooks function from our API helper
 import { getBooks } from '../utils/api';
 
-const BookExchangeScreen = ({ user, navigation }) => {
+const BookExchangeScreen = ({ navigation }) => {
+    const { user } = useAuth();
     // State for the list of books from the API
     const [books, setBooks] = useState([]);
     // State to show loading spinner while fetching
@@ -28,16 +31,17 @@ const BookExchangeScreen = ({ user, navigation }) => {
     const [error, setError] = useState('');
 
     // ============================================================
-    // useEffect runs when the component first appears on screen
-    // We use it here to fetch the books from the backend
-    // The empty array [] means "only run this once when screen loads"
-    // If we didnt use [], it would run every time the screen re-renders
+    // Refresh when this screen gains focus, including after adding a book.
     // ============================================================
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
+        let active = true;
+        setLoading(true);
+        setError('');
         const fetchBooks = async () => {
             // Call the getBooks function from api.js
             const data = await getBooks();
 
+            if (!active) return;
             // Check if we got an array of books or an error
             if (Array.isArray(data)) {
                 // If data is an array, its the list of books
@@ -54,7 +58,8 @@ const BookExchangeScreen = ({ user, navigation }) => {
         };
 
         fetchBooks();
-    }, []);
+        return () => { active = false; };
+    }, []));
 
     // Show loading spinner while fetching books
     if (loading) {
@@ -145,7 +150,7 @@ const BookExchangeScreen = ({ user, navigation }) => {
                 )}
 
                 {/* Back to home */}
-                <TouchableOpacity onPress={() => navigation('home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Text style={[styles.link, { textAlign: 'center', marginTop: 15 }]}>
                         Back to Home
                     </Text>

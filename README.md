@@ -13,7 +13,7 @@ Open VS Code and go to File > Open Folder. Navigate to the `backend` folder and 
 Open a Terminal inside VS Code by going to Terminal > New Terminal (or press Ctrl + ` on your keyboard).
 
 ## IMPORTANT ##
-Since Git will not push the .env or any file name that starts with "." for security. Such as your applications keys. You will need to copy over your last "config.env" file to the back end project. Make sure the PORT configuration is set to 4000, this is a hard requirement for this assignment.
+The .gitignore file excludes config.env and .env; Git does not automatically exclude all dotfiles. Copy your previous config.env privately into backend/. Set PORT=4000. Authentication also requires JWT_SECRET, JWT_EXPIRES_IN (for example 90d), and JWT_COOKIE_EXPIRES_IN (for example 90). Keep the signing secret and database credentials out of commits and screenshots. The API defaults to /api/v1 if API_VERSION is absent.
 
 Then Install the dependencies first:
 
@@ -55,11 +55,12 @@ npx expo start
 You should see a QR code in the terminal. Press **W** on your keyboard to open the app in your web browser.
 
 ## ON ERROR ##
-Most likely you have an aolder version of expo
-Update the "expo" package by installing 
+Check the actual Metro error before changing SDK versions. This checkout uses Expo SDK 55.
+From mobile/, install the locked dependencies and check compatibility:
 
 ```
-npx expo install expo@latest
+npm ci
+npx expo install --check
 npx expo start
 ```
 
@@ -76,7 +77,7 @@ Once both the backend and mobile are running, you can register a new user, login
 ## Tech Stack
 
 - Backend: Node.js, Express.js, MongoDB, Mongoose, JWT, bcryptjs, CORS
-- Mobile: React Native, Expo SDK 50, AsyncStorage
+- Mobile: React Native 0.83, React 19.2, Expo SDK 55, React Native Web 0.21; SecureStore for native JWT storage, localStorage on web
 - Auth: JSON Web Tokens (Bearer header for mobile, cookies for web)
 
 ## API Endpoints
@@ -93,24 +94,3 @@ Once both the backend and mobile are running, you can register a new user, login
 ## Full Setup Guide
 
 Start the backend server and visit http://localhost:4000 for the full interactive setup guide with step-by-step instructions, device options, testing guide, API reference, troubleshooting, and Git workflow.
-
-# Update: Edited by Jared Esquibel for Git assignment
-
-## Assignment Test Edit
-This line was added to demonstrate editing a file in VS Code.
-
-Edited again on March 21, 2026.
-This is another test edit.
-
-# Update: Edited by VarmaTamada for Git assignment
-
-
-<!-- Test edit for Step 3 -->
-
-## Update: Blake Duprey
-
-## Module 5 Activity 1 Step 3 Test Hamed Solaiman
-
-# Module 5 Activity 1 - Brad Exner
-## Module 5 Activity 1 Step 3 Test Shing Jay Rou
-Making a change to a file in VS after cloning the repository in step 2.

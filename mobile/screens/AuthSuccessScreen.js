@@ -1,12 +1,9 @@
 // AuthSuccessScreen.js
 // This screen shows after a successful login or signup
-// It displays the user name, email, and the JWT token
-// This is similar to the AuthSuccess component in the React web version
-//
-// In a real production app you would NOT show the JWT token to users
-// We show it here for learning purposes so students can see how JWT works
+// It restores authentication context without displaying the JWT token.
 
 import React, { useEffect } from 'react';
+import { useAuth } from '../AuthContext';
 import {
     View,
     Text,
@@ -17,12 +14,12 @@ import {
 
 const AuthSuccessScreen = ({ route, navigation }) => {
     const { user, token } = route.params;
-    const { login } = route.params;
+    const { login } = useAuth();
 
     useEffect(() => {
         if (login && user && token) {
             login(user, token);
-            navigation.navigate('Home');
+
         }
     }, [login, user, token, navigation]);
 
@@ -41,8 +38,8 @@ const AuthSuccessScreen = ({ route, navigation }) => {
 
             {/* Token display card */}
             <View style={styles.tokenCard}>
-                <Text style={styles.tokenTitle}>Your JWT Token:</Text>
-                <Text style={styles.tokenText}>{token || 'No token'}</Text>
+                <Text style={styles.tokenTitle}>Session saved</Text>
+                <Text style={styles.tokenText}>Authentication token hidden.</Text>
                 <Text style={styles.tokenNote}>
                     This token is saved on your phone. It is sent with every request
                     to the backend API in the Authorization header so the server knows
